@@ -107,10 +107,12 @@ export default function ListArticle() {
           sx={{
             marginBottom: "5vh",
             marginTop: "3vh",
-            color: "#D07017",
-            border: "1px solid #D07017",
+            color: "#1E2022",
+            fontWeight: "bold",
+            border: "none",
+            backgroundColor: "#D07017",
           }}
-          variant="outlined"
+          variant="contained"
           size="large"
           onClick={() => moreArticles()}
         >

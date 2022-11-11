@@ -9,17 +9,24 @@ import SearchIcon from "@mui/icons-material/Search";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import InputAdornment from "@mui/material/InputAdornment";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import IconButton from "@mui/material/IconButton";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 export default function Header() {
-  const { setSort, listArticlesTitle } = useContext(ArticleContext);
+  const { setSort, listArticlesTitle, sorter } = useContext(ArticleContext);
   const [inputValue, setInputValue] = useState("");
+  const [label, setLabel] = useState("");
 
   const handleChange = () => {
     listArticlesTitle(inputValue);
+  };
+
+  const handleChange2 = (event: SelectChangeEvent) => {
+    setSort(event.target.value);
   };
 
   return (
@@ -40,7 +47,11 @@ export default function Header() {
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton edge="end" onClick={() => handleChange()}>
-                    <SearchIcon />
+                    <Router>
+                      <Link to={inputValue}>
+                        <SearchIcon style={{ color: "white" }} />
+                      </Link>
+                    </Router>
                   </IconButton>
                 </InputAdornment>
               }
@@ -61,16 +72,16 @@ export default function Header() {
               Sort
             </InputLabel>
             <Select
+            sx={{color: "white"}}
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
-              value={""}
+              value={sorter}
+              onChange={handleChange2}
               autoWidth
               label="Sort"
             >
-              <MenuItem onClick={() => setSort("oldest")}>
-                Mais antigas
-              </MenuItem>
-              <MenuItem onClick={() => setSort("newest")}>Mais novas</MenuItem>
+              <MenuItem value={"oldest"}>Mais antigas</MenuItem>
+              <MenuItem value={"newest"}>Mais novas</MenuItem>
             </Select>
           </FormControl>
         </Toolbar>
