@@ -2,5 +2,18 @@
   text-align: center;
   
 }
-
-
+::-webkit-scrollbar{
+  
+  width: 15px;
+  background:#1E2022;
+}
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 14px 14px #1E2022 ;
+  border: solid 1px #D07017;
+  border-radius: 200px;
+  
+  
+}
+::-webkit-scrollbar-thumb:hover {
+  box-shadow: inset 0 0 14px 14px #302E53;
+}

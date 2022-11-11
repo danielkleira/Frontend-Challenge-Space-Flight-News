@@ -1,46 +1,122 @@
 import { ArticleContext } from "../../Providers/Articles";
-import { useEffect, useState, useContext } from "react";
-import RightCard from "../RigthCard";
+import { useEffect, useContext } from "react";
 
-export const ListArticle = () => {
-  const { articles, listArticles, listArticlesTitle, moreArticles } =
+import RightCard from "../RigthCard";
+import LeftCard from "../LeftCard";
+
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+
+export default function ListArticle() {
+  const { articles, listArticles, moreArticles, sorter } =
     useContext(ArticleContext);
   useEffect(() => {
     listArticles();
   }, []);
 
-  useEffect(() => {
-    console.log(articles);
-  }, [articles]);
-
   return (
     <>
       {articles.length > 0 ? (
-        <div style={{display:'flex', flexDirection:'column',alignItems:'center'}}>
-          {articles.map((article) => (
-            <>
-              <div></div>
-              <RightCard
-                id={article.id}
-                imageUrl={article.imageUrl}
-                newsSite={article.newsSite}
-                publishedAt={article.publishedAt}
-                summary={article.summary}
-                title={article.title}
-                updatedAt={article.updatedAt}
-                url={article.url}
-                key={article.id}
-              />
-            </>
-          ))}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          {articles
+            .sort((a, b) => (sorter === "oldest" ? a.id - b.id : b.id - a.id))
+            .map((article, index) => {
+              if (index % 2 === 0) {
+                return (
+                  <LeftCard
+                    id={article.id}
+                    imageUrl={article.imageUrl}
+                    newsSite={article.newsSite}
+                    publishedAt={article.publishedAt}
+                    summary={article.summary}
+                    title={article.title}
+                    updatedAt={article.updatedAt}
+                    url={article.url}
+                    key={article.id}
+                  />
+                );
+              } else {
+                return (
+                  <RightCard
+                    id={article.id}
+                    imageUrl={article.imageUrl}
+                    newsSite={article.newsSite}
+                    publishedAt={article.publishedAt}
+                    summary={article.summary}
+                    title={article.title}
+                    updatedAt={article.updatedAt}
+                    url={article.url}
+                    key={article.id}
+                  />
+                );
+              }
+            })}
         </div>
       ) : (
-        <span>ainda nao</span>
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={articles.length === 0}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
       )}
 
-      <div>
-        <button onClick={() => moreArticles()}>Carregar mais</button>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "1vh",
+        }}
+      >
+        <Box
+          sx={{
+            width: 10,
+            height: 10,
+            backgroundColor: "transparent",
+            border: "4px solid #D07017",
+          }}
+        />
+
+        <Box
+          sx={{
+            width: 10,
+            height: 10,
+            backgroundColor: "transparent",
+            border: "4px solid #D07017",
+          }}
+        />
+        <Box
+          sx={{
+            width: 10,
+            height: 10,
+            backgroundColor: "transparent",
+            border: "4px solid #D07017",
+          }}
+        />
+        <Button
+          sx={{
+            marginBottom: "5vh",
+            marginTop: "3vh",
+            color: "#D07017",
+            border: "1px solid #D07017",
+          }}
+          variant="outlined"
+          size="large"
+          onClick={() => moreArticles()}
+        >
+          Carregar mais
+        </Button>
       </div>
     </>
   );
-};
+}

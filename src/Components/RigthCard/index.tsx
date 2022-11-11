@@ -1,35 +1,12 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
-import Avatar from "@mui/material/Avatar";
-import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Button from "@mui/material/Button";
-
-interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean;
-}
-
-const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
 
 interface ICardProps {
   id: number;
@@ -42,6 +19,20 @@ interface ICardProps {
   updatedAt: string;
 }
 
+const style = {
+  position: "absolute" as "absolute",
+  display: "flex",
+  textAlign: "center",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "45vw",
+  color: "black",
+  bgcolor: "background.paper",
+  border: "2px solid #fff",
+  p: 4,
+};
+
 export default function RightCard({
   id,
   title,
@@ -52,56 +43,194 @@ export default function RightCard({
   publishedAt,
   updatedAt,
 }: ICardProps) {
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <Card
       sx={{
-        maxWidth: "70vw",
-        maxHeight: "350px",
+        maxWidth: "59vw",
         display: "flex",
-        marginTop: "5vh",
-        width: "70vw",
-        backgroundColor: "#302E53",
-        gap: "5vh"
+        marginTop: "10vh",
+        marginBottom: "5vh",
+        width: "59vw",
+        backgroundColor: "#1E2022",
       }}
     >
-      <CardMedia
-        sx={{ display: { xs: "none", md: "block" }, maxWidth: "35vh" }}
-        component="img"
-        height='auto'
-        image={imageUrl}
-        alt="Paella dish"
-      />
-
       <Card
         sx={{
-          maxHeight: "350px",
           backgroundColor: "transparent",
-          color: "#D07017",
+          color: "white",
+          padding: "5px 10px 10px 20px",
         }}
       >
         <CardHeader
-          sx={{ display: "flex", textAlign: "left", color: "#D07017" }}
-          title={title}
+          sx={{ display: "flex", textAlign: "left", color: "white" }}
+          title={
+            <Typography sx={{ display: "flex", width: "100%" }}>
+              {title}
+            </Typography>
+          }
           subheader={
-            <Typography sx={{ color: "#D07017" }}>
-              {publishedAt.replace(/T.*/, "").split("-").reverse().join("-")}
+            <Typography
+              sx={{
+                color: "#878788",
+                fontSize: "12px",
+                display: "flex",
+                justifyContent: "space-between",
+                width: "95%",
+              }}
+            >
+              <span>
+                {publishedAt.replace(/T.*/, "").split("-").reverse().join("/")}
+              </span>
+              <a href={url} style={{ textDecoration: "none" }}>
+                <Button
+                  variant="outlined"
+                  sx={{ p: 2, display: { xs: "none", md: "block" } }}
+                  style={{
+                    backgroundColor: "#D07017",
+                    fontSize: "12px",
+                    height: "1vw",
+                    display: "flex",
+                    color: "#1E2022",
+                    border: "none",
+                    textTransform: "none",
+                  }}
+                >
+                  News Site
+                </Button>
+              </a>
             </Typography>
           }
         />
 
         <CardContent>
-          <Typography variant="body2"sx={{ color: "#D07017" }} >
+          <Typography
+            variant="body2"
+            sx={{
+              display: "-webkit-box",
+              textAlign: "left",
+              overflow: "hidden",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 3,
+              opacity: "0.8",
+            }}
+          >
             {summary}
           </Typography>
         </CardContent>
-        <Button variant="contained">Contained</Button>
+        <Button
+          variant="contained"
+          sx={{}}
+          style={{
+            backgroundColor: "#D07017",
+            marginBottom: "1vh",
+            alignItems: "left",
+            float: "left",
+            color: "#1E2022",
+            fontWeight: "bold",
+            fontSize: "12px",
+            textTransform: "none",
+            marginLeft: "15px",
+          }}
+          onClick={handleOpen}
+        >
+          Ver Mais
+        </Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <CardMedia
+              sx={{
+                display: { xs: "none", md: "block" },
+                maxWidth: "25vh",
+                width: "22vw",
+              }}
+              component="img"
+              height="auto"
+              image={imageUrl}
+              alt="Image site"
+            />
+            <Card
+              sx={{
+                padding: "5px 10px 10px 20px",
+              }}
+            >
+              <CardHeader
+                sx={{ display: "flex", textAlign: "left" }}
+                title={
+                  <Typography sx={{ display: "flex", width: "100%" }}>
+                    {title}
+                  </Typography>
+                }
+                subheader={
+                  <Typography
+                    sx={{
+                      color: "#878788",
+                      fontSize: "12px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      width: "95%",
+                    }}
+                  >
+                    <span>
+                      {publishedAt
+                        .replace(/T.*/, "")
+                        .split("-")
+                        .reverse()
+                        .join("/")}
+                    </span>
+                  </Typography>
+                }
+              />
+
+              <CardContent>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    textAlign: "left",
+                  }}
+                >
+                  {summary}
+                </Typography>
+              </CardContent>
+              <a href={url} style={{ textDecoration: "none" }}>
+                <Button
+                  variant="contained"
+                  sx={{}}
+                  style={{
+                    backgroundColor: "#D07017",
+                    marginBottom: "1vh",
+                    fontWeight: "bold",
+                    fontSize: "12px",
+                    textTransform: "none",
+                  }}
+                  onClick={handleOpen}
+                >
+                  Ir para o site
+                </Button>
+              </a>
+            </Card>
+          </Box>
+        </Modal>
       </Card>
+      <CardMedia
+        sx={{
+          display: { xs: "none", md: "block" },
+          maxWidth: "45vh",
+          width: "22vw",
+        }}
+        component="img"
+        height="auto"
+        image={imageUrl}
+        alt="Site image"
+      />
     </Card>
   );
 }

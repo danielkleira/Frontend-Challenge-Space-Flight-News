@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  node:
+    image: node:12
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/srv/Frontend-Challange-space-flight-news
+    working_dir: /srv/Frontend-Challange-space-flight-news
+    command: "npm start"

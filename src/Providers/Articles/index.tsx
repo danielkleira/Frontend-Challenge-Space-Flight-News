@@ -1,5 +1,6 @@
-import { Api } from "../../Services/Api";
 import { createContext, ReactNode, useState } from "react";
+
+import { Api } from "../../Services/Api";
 
 export interface IArticles {
   id: number;
@@ -21,6 +22,8 @@ interface IArticlesProps {
 
 interface ArticleProviderData {
   articles: IArticles[];
+  sorter: string;
+  setSort: (value: string) => void;
   moreArticles: () => void;
   listArticles: () => void;
   listArticlesTitle: (title: string) => void;
@@ -33,11 +36,11 @@ export const ArticleContext = createContext<ArticleProviderData>(
 const ArticleProvider = ({ children }: IArticlesProps) => {
   const [articles, setArticles] = useState<IArticles[]>([]);
   const [totalArticles, setTotalArticles] = useState(10);
+  const [sorter, setSort] = useState("");
 
   const listArticles = async () => {
     await Api.get("articles/").then((response) => {
       setArticles(response.data);
-      console.log(articles);
     });
   };
 
@@ -49,7 +52,9 @@ const ArticleProvider = ({ children }: IArticlesProps) => {
   };
 
   const listArticlesTitle = async (title: string) => {
-    await Api.get(`articles?title_contains=${title}`).then((response) => {
+    await Api.get(
+      `articles?title_contains=${title}&_limit=${totalArticles}`
+    ).then((response) => {
       setArticles(response.data);
     });
   };
@@ -58,6 +63,8 @@ const ArticleProvider = ({ children }: IArticlesProps) => {
     <ArticleContext.Provider
       value={{
         articles,
+        sorter,
+        setSort,
         moreArticles,
         listArticles,
         listArticlesTitle,
