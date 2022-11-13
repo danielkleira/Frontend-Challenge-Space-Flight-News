@@ -14,14 +14,18 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import IconButton from "@mui/material/IconButton";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import {
+  useNavigate,
+} from "react-router-dom";
 
 export default function Header() {
   const { setSort, listArticlesTitle, sorter } = useContext(ArticleContext);
   const [inputValue, setInputValue] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = () => {
     listArticlesTitle(inputValue);
+    navigate(`/${inputValue}`);
   };
 
   const handleChange2 = (event: SelectChangeEvent) => {
@@ -46,11 +50,11 @@ export default function Header() {
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton edge="end" onClick={() => handleChange()}>
-                    <Router>
-                      <Link to={inputValue}>
+                    {/* <Router>
+                      <Link to={`/${inputValue}`}>
                         <SearchIcon style={{ color: "white" }} />
                       </Link>
-                    </Router>
+                    </Router> */}
                   </IconButton>
                 </InputAdornment>
               }
@@ -71,17 +75,21 @@ export default function Header() {
               Sort
             </InputLabel>
             <Select
-            sx={{color: "white"}}
+              sx={{ color: "white" }}
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
               value={sorter}
               onChange={handleChange2}
               autoWidth
               label="Sort"
-              data-testId='select'
+              data-testId="select"
             >
-              <MenuItem data-testId='oldest' value={"oldest"}>Mais antigas</MenuItem>
-              <MenuItem data-testId='newest' value={"newest"}>Mais novas</MenuItem>
+              <MenuItem data-testId="oldest" value={"oldest"}>
+                Mais antigas
+              </MenuItem>
+              <MenuItem data-testId="newest" value={"newest"}>
+                Mais novas
+              </MenuItem>
             </Select>
           </FormControl>
         </Toolbar>

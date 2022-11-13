@@ -26,7 +26,7 @@ interface ArticleProviderData {
   setSort: (value: string) => void;
   moreArticles: () => void;
   listArticles: () => void;
-  listArticlesTitle: (title: string) => void;
+  listArticlesTitle: (title: string | undefined) => void;
 }
 
 export const ArticleContext = createContext<ArticleProviderData>(
@@ -51,7 +51,7 @@ const ArticleProvider = ({ children }: IArticlesProps) => {
     setTotalArticles(totalArticles + 10);
   };
 
-  const listArticlesTitle = async (title: string) => {
+  const listArticlesTitle = async (title: string | undefined) => {
     await Api.get(
       `articles?title_contains=${title}&_limit=${totalArticles}`
     ).then((response) => {

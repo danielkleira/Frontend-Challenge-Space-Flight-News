@@ -1,13 +1,14 @@
 import React from "react";
 import "./App.css";
 import Providers from "./Providers";
-import  Main  from "./Pages/Main";
+import Main from "./Pages/Main";
+import RoutesProject from "./Routes";
 
 function App() {
   return (
     <div className="App">
       <Providers>
-        <Main/>
+        <RoutesProject />
       </Providers>
     </div>
   );

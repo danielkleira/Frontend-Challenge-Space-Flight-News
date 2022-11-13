@@ -8,12 +8,20 @@ import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import { useParams } from "react-router-dom";
 
 export default function ListArticle() {
-  const { articles, listArticles, moreArticles, sorter } =
+  const { articles, listArticles, moreArticles, sorter, listArticlesTitle } =
     useContext(ArticleContext);
+
+  const param = useParams();
+
   useEffect(() => {
-    listArticles();
+    if (param) {
+      listArticlesTitle(param.id);
+    } else {
+      listArticles();
+    }
   }, []);
 
   return (
