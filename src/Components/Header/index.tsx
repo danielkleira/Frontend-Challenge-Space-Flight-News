@@ -19,7 +19,6 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 export default function Header() {
   const { setSort, listArticlesTitle, sorter } = useContext(ArticleContext);
   const [inputValue, setInputValue] = useState("");
-  const [label, setLabel] = useState("");
 
   const handleChange = () => {
     listArticlesTitle(inputValue);
@@ -79,9 +78,10 @@ export default function Header() {
               onChange={handleChange2}
               autoWidth
               label="Sort"
+              data-testId='select'
             >
-              <MenuItem value={"oldest"}>Mais antigas</MenuItem>
-              <MenuItem value={"newest"}>Mais novas</MenuItem>
+              <MenuItem data-testId='oldest' value={"oldest"}>Mais antigas</MenuItem>
+              <MenuItem data-testId='newest' value={"newest"}>Mais novas</MenuItem>
             </Select>
           </FormControl>
         </Toolbar>
