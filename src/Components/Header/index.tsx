@@ -14,9 +14,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import IconButton from "@mui/material/IconButton";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-import {
-  useNavigate,
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const { setSort, listArticlesTitle, sorter } = useContext(ArticleContext);
@@ -47,15 +45,13 @@ export default function Header() {
               id="outlined-adornment-password"
               onChange={(e) => setInputValue(e.target.value)}
               value={inputValue}
+              sx={{ color: "white" }}
               endAdornment={
                 <InputAdornment position="end">
-                  <IconButton edge="end" onClick={() => handleChange()}>
-                    {/* <Router>
-                      <Link to={`/${inputValue}`}>
-                        <SearchIcon style={{ color: "white" }} />
-                      </Link>
-                    </Router> */}
-                  </IconButton>
+                  <IconButton
+                    edge="end"
+                    onClick={() => handleChange()}
+                  ><SearchIcon sx={{ color: "white" }} /></IconButton>
                 </InputAdornment>
               }
               label="Search"

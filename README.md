@@ -87,6 +87,7 @@ e abra em seu navegador o endereço
 ```cl
 http://localhost:3000/
 ```
+
 <br />
 <br />
 
@@ -96,6 +97,12 @@ Utilize o seguinte comando
 
 ```cl
 yarn test
+```
+
+Link da apresentação do projeto
+
+```cl
+https://www.loom.com/embed/7e7d9f4cfe1340839084179b0f164e12
 ```
 
 This is a challenge by [Coodesh](https://coodesh.com/)

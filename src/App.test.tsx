@@ -1,18 +1,9 @@
 import {
   render,
   screen,
-  waitFor,
-  getByRole,
-  getByText,
 } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import UserEvent from "@testing-library/user-event";
-import App from "./App";
-import Header from "./Components/Header";
 import LeftCard from "./Components/LeftCard";
-import ListArticle from "./Components/ListArticles";
 import RightCard from "./Components/RigthCard";
-import Main from "./Pages/Main";
 
 test("renders text from leftCard", () => {
   render(
@@ -50,11 +41,6 @@ test("renders text from rightCard", () => {
   expect(screen.getByText(/News Site/i)).toBeInTheDocument();
 });
 
-test("renders text from hearder", async () => {
-  render(<Header />);
 
-  expect(screen.getByLabelText(/Search/i)).toBeInTheDocument();
-  expect(screen.getByLabelText(/Sort/i)).toBeInTheDocument();
-});
 
 

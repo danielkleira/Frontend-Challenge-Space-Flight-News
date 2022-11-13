@@ -8,6 +8,7 @@ function RoutesProject() {
       <BrowserRouter>
         <Routes>
           <Route path="/:id" element={<Main />}></Route>
+          <Route path="/" element={<Main />}></Route>
         </Routes>
       </BrowserRouter>
     </>

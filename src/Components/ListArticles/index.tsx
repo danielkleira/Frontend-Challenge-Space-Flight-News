@@ -17,7 +17,9 @@ export default function ListArticle() {
   const param = useParams();
 
   useEffect(() => {
-    if (param) {
+    console.log(articles);
+    console.log(param);
+    if (param.id !== undefined) {
       listArticlesTitle(param.id);
     } else {
       listArticles();
