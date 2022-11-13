@@ -1,10 +1,13 @@
 # Frontend-Challenge-Space-Flight-News
 
-## ✨ Projeto
+# ✨ Projeto
 
 Frontend-Challenge-Space-Flight-News é uma aplicação que consome informações da API [Space Flight News](https://api.spaceflightnewsapi.net/v3/documentation), uma API pública com informações relacionadas a voos espaciais. Nesse projeto você pode exibir os artigos listados na API, acessar suas informações, visitar o site de origem dos artigos, além de organiza-los por data e pesquisar por palavras chave.
 
-## 🚀 Tecnologias
+<br />
+<br />
+
+# 🚀 Tecnologias
 
 Esse projeto foi desenvolvido com as seguintes tecnologias/bibliotecas:
 
@@ -23,54 +26,74 @@ Esse projeto foi desenvolvido com as seguintes tecnologias/bibliotecas:
   <tr>
 <td> MaterialUI</td>
 <td> TypeScript</td>
-<td> Jest</td>
+<td> API</td>
  </tr>
 
    <tr>
 <td> Context</td>
 <td> Docker</td>
+<td> Jest</td>
  </tr>
 </table>
 
-# 👨🏻‍💻 Executando o projeto
+<br />
+<br />
 
+# 💻 Instalando o projeto
 
-Utilize o 
+Utilize o
+
 ```cl
-yarn 
+yarn
 ```
+
 ou
+
 ```cl
 npm install
 ```
+
 para instalar as dependências do projeto.
-Em seguida, inicie o projeto com :
+<br />
+<br />
+
+# 👨🏻‍💻 Executando o projeto
 
 ```cl
 yarn start
-``` 
+```
+
 ou
+
 ```cl
 npmstart
-```  
+```
+
 isso o abrirá em seu navegador.
+<br />
+<br />
 
+## 🐳 Docker
 
-
-## Docker
 Outra forma de rodar o projeto é utilizando o Docker.
-Utilize o seguinte comando  
+Utilize o seguinte comando
+
 ```cl
 docker compose up
 ```
+
 e abra em seu navegador o endereço
+
 ```cl
 http://localhost:3000/
 ```
+<br />
+<br />
 
 # 🧪 Executando testes
 
-Utilize o seguinte comando  
+Utilize o seguinte comando
+
 ```cl
 yarn test
 ```

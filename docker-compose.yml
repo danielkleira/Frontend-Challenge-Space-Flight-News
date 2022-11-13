@@ -8,4 +8,4 @@ services:
     volumes:
       - ./:/srv/Frontend-Challange-space-flight-news
     working_dir: /srv/Frontend-Challange-space-flight-news
-    command: "npm start"
+    command: "yarn start"
